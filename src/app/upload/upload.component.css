@@ -1,0 +1,109 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh; /* A komponens középre helyezése */
+  }
+  
+  .upload-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.103);
+    flex-direction: column;
+    width: 600px;
+    height: 200px;
+    border-radius: 90px;
+    justify-content: center;
+    box-shadow: 2px 4px 71px 14px rgba(0,0,0,0.84);
+
+
+  }
+
+  .upload-inside{
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    flex-direction: row;
+    width: 97%;
+    background-color: aliceblue;
+    margin-top: 27px;
+    border-radius: 79px;
+    height: 40px;
+  }
+  
+
+  .search-input {
+    flex: 1; /* A beviteli mező kitölti a rendelkezésre álló helyet */
+  }
+  
+  .button-container {
+    margin-top: 20px;
+  }
+  
+  .analysis-button,
+  .upload-button {
+    margin: 0 10px; /* Térköz a gombok között */
+  }
+  
+  .example-form {
+    min-width: 150px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    height: 50px !important;
+    margin-top: 24px;
+
+}
+
+.background{
+    width: 100%;
+    height: calc(100% - 76px);
+    position: relative;
+    background-image: url(../../assets/blurred-waiting-room.jpg);
+    background-repeat: no-repeat;
+    object-fit: fill;
+    background-size: cover;
+}
+
+.errorTable{
+  padding-top: 8px;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+::ng-deep .example-full-width .mdc-text-field{
+  background-color: aliceblue !important;
+ 
+}
+
+::ng-deep .example-full-width label{
+   color: black !important;
+}
+
+
+.mainText{
+  margin-bottom: 0px;
+  color: aliceblue;
+  font-size: 55px;
+  font-weight: bold;
+  text-shadow: 10px 7px 10px rgb(49 48 46 / 59%);
+}

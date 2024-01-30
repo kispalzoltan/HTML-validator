@@ -1,0 +1,31 @@
+.logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 20px; /* Kisebb távolság a logó és a gombok között */
+}
+.spacer {
+    flex: 1 1 auto;
+}
+
+.action-button{
+    text-align: right;
+}
+
+.nav-button{
+    background-color: aliceblue;
+}
+
+button{
+    margin-right: 8px;
+}
+
+mat-toolbar{
+    background-color: #4f86ec;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid black;
+} 
+.mat-mdc-raised-button.nav-button {
+    background-color: #4f86ec;
+}
+
