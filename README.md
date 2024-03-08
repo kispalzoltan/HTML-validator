@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Checkout and commit
+Checkout a new branch in your repo, using the issue key in the branch name. For example, git checkout -b JRA-123-<branch-name>. 
+
+When committing changes to your branch, use the issue key in your commit message to link those commits to the development panel in your Jira issue. For example, git commit -m "JRA-123 <summary of commit>".
