@@ -56,3 +56,40 @@
   .errorTable{
     padding-top: 10px ;
   }
+
+  .ruleTable{
+    max-height: 174px;
+    width: 100%;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    overflow-y: auto;
+
+  }
+  .ruleTableID{
+    width: 10%;
+  }
+  .ruleTableName{
+    width: 70%;
+  }
+  .ruleTableDel{
+
+  }
+
+  tr {
+    background-color: #dddddd3b;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #ffffff10;
+  }
+  header{
+    border-bottom: solid white 2px;
+  }
+
+
+  .ownRulesContainer ::ng-deep .mat-expansion-panel-body{
+    max-height: 165px;
+    overflow: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+  }

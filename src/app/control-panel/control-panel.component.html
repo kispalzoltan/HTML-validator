@@ -11,7 +11,8 @@
 
 
 <div class="errorTable">
-  <table mat-table [dataSource]="this.dataSource" class="mat-elevation-z8">
+  <p>{{this.resultTableData[0]?.type}}</p>
+  <table mat-table [dataSource]="this.resultTableData" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -19,25 +20,19 @@
     <!-- Position Column -->
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
     </ng-container>
   
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Név </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.subtipe}} </td>
     </ng-container>
   
     <!-- Weight Column -->
     <ng-container matColumnDef="priority">
       <th mat-header-cell *matHeaderCellDef> Prioritás </th>
-      <td mat-cell *matCellDef="let element"> {{element.priority}} </td>
-    </ng-container>
-  
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="shortDesc">
-      <th mat-header-cell *matHeaderCellDef> Rövid leírás </th>
-      <td mat-cell *matCellDef="let element"> {{element.shortDesc}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.message}} </td>
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -47,17 +42,32 @@
 </div>
 </div>
 <div class="sideBox">
-    <div class="smallContainer">
+    <div class="smallContainer ownRulesContainer">
         <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Saját szabályok
               </mat-panel-title>
-              <button class="addbtn" mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon">
+              <button class="addbtn" mat-mini-fab color="accent" (click)="createRule()">
                 <mat-icon>add</mat-icon>
               </button>
             </mat-expansion-panel-header>
-        
+        <table class="ruleTable">
+          <header>
+            <tr>
+              <th class="ruleTableID">ID</th>
+              <th class="ruleTableName">Szabályok</th>
+              <th class="ruleTableDel">Törlés</th>
+            </tr>
+          </header>
+          <body>
+            <tr *ngFor="let item of ownRules; index as i">
+              <td class="ruleTableID">{{i}}</td>
+              <td class="ruleTableName">{{item.ruleName}}</td>
+              <td class="ruleTableDel"><button mat-button (click)="deleteOwnRule(item)">Törlés</button></td>
+            </tr>
+          </body>
+        </table>
         </mat-expansion-panel>
     </div>
 

@@ -1,39 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { HtmlErrorDetailsComponentComponent } from '../html-error-details-component/html-error-details-component.component';
+import { DataSharingService } from '../services/data-sharing.service';
+import { W3CValidationResult } from '../interface/W3CValidationResult';
+import { W3CValidationMessage } from '../interface/W3CValidationMessage';
+import { RuleCreatorComponent } from '../components/rule-creator/rule-creator.component';
+import { OwnRuleService } from '../services/own-rule.service';
+import { OwnRule } from '../interface/OwnRule';
 
-export interface defectElement {
-  name: string;
-  position: number;
-  priority: number;
-  shortDesc: string;
-  description?: string;
-}
-
-const ELEMENT_DATA: defectElement[] = [
-  {position: 1, name: 'Egy rossz hiba', priority: 1, shortDesc: 'asd'},
-  {position: 2, name: 'Helium', priority: 4, shortDesc: 'asdsad'},
-  {position: 3, name: 'Lithium', priority: 5, shortDesc: 'fdgdg'},
-  {position: 4, name: 'Beryllium', priority: 3, shortDesc: 'gngfd'},
-  {position: 5, name: 'Boron', priority: 1, shortDesc: 'sdfgsd'},
-  {position: 6, name: 'Carbon', priority: 1, shortDesc: 'www'},
-  {position: 7, name: 'Nitrogen', priority: 1, shortDesc: 'efas'},
-  {position: 8, name: 'Oxygen', priority: 1, shortDesc: 'gf'},
-  {position: 9, name: 'Fluorine', priority: 1, shortDesc: 'bsaDFSE'},
-  {position: 10, name: 'Neon', priority: 2, shortDesc: 'SDGSA'},
-];
 
 @Component({
   selector: 'app-control-panel',
   templateUrl: './control-panel.component.html',
   styleUrl: './control-panel.component.css'
 })
-export class ControlPanelComponent {
-  displayedColumns: string[] = ['position', 'name', 'priority', 'shortDesc'];
-  dataSource = ELEMENT_DATA;
-  
-  constructor(public dialog: MatDialog){
+export class ControlPanelComponent implements OnInit {
+  displayedColumns: string[] = ['position', 'name', 'priority'];
 
+  resultTableData: W3CValidationMessage[] = [{
+    "type": "error",
+    "lastLine": 81,
+    "lastColumn": 55,
+    "firstColumn": 3,
+    "message": "An “img” element must have an “alt” attribute, except under certain conditions. For details, consult guidance on providing text alternatives for images.",
+    "extract": "n-top\">\n  <img src=\"/w3images/avatar_g.jpg\" style=\"width:100%\">\n    <"
+}]
+  ownRules: OwnRule[] = [];
+  constructor(public dialog: MatDialog, private sharingData:DataSharingService, private ownRuleService:OwnRuleService){
+    
+  }
+  ngOnInit(): void {
+    this.resultTableData = this.sharingData.getSharedData().messages
+    console.log(this.resultTableData)
+    console.log(this.resultTableData[0])
+    this.getUserRules()
   }
 
   clickedRow(row:any){
@@ -46,6 +46,35 @@ export class ControlPanelComponent {
       },
     });
     console.log(row)
+  }
+
+  createRule(){
+    this.dialog.open(RuleCreatorComponent, {
+      height: '80%',
+      width: '80%',
+    });
+  }
+
+  getUserRules(){
+    this.ownRuleService.getOwnRule(localStorage.getItem("email")!).subscribe({
+      next:(value) =>{
+          console.log(value)
+          this.ownRules = value
+      },
+      error(err) {
+          console.log("getUserRules hibát kapott: "+err)
+      },
+    })
+  }
+  deleteOwnRule(rule:OwnRule){
+    this.ownRuleService.deleteOwnRule(localStorage.getItem("email")!, rule).subscribe({
+      next:(value) =>{
+          console.log(value)
+      },
+      error:(err) => {
+          console.log("deleteOwnRule hibát kapott: "+err)
+      },
+    })
   }
   
 }

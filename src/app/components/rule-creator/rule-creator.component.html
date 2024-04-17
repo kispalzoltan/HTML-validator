@@ -1,0 +1,78 @@
+<div class="wrapper">
+    <div class="header-wrapper">
+      <h2 class="header">Saját szabály létrehozása</h2>
+    </div>
+    <div [formGroup]="form">
+        <div class="displayRow">
+            <h3 class="label">Szabály neve:</h3>
+            <mat-form-field appearance="fill">
+                <input matInput formControlName="ruleName" placeholder="Saját szabály">
+            </mat-form-field>
+        </div>
+        <div class="displayRow">
+            <h3 class="label">HTML tag:</h3>
+            <mat-form-field appearance="fill">
+                <input matInput formControlName="tagName" placeholder="pl: img">
+            </mat-form-field>
+        </div>
+      <div formArrayName="attributes">
+        <h3 class="label">Vizsgálni kívánt atributumok és értékei</h3>
+        <div class="input-wrapper" *ngFor="let attribute of attributes?.controls; let i = index">
+           <div [formGroupName]="i" class="displayRow">
+            <h3 class="label">Atributum neve:</h3>
+                <mat-form-field appearance="fill">
+                    <input matInput
+                        formControlName="attributeName"
+                        placeholder="pl: src">
+                </mat-form-field>
+                <h3 class="label">Atributum értéke:</h3>
+                <mat-form-field appearance="fill">
+                    <input matInput
+                        formControlName="attributeValue"
+                        placeholder="pl: /assets/public">
+                </mat-form-field>
+            </div>
+
+        <button mat-button class="remove" (click)="removeAtribute(i)">Törlés</button>
+
+          </div>
+          <button mat-button class="button" (click)="addAtribute()">hozzáadás</button>
+       </div>
+       <div class="displayRow">
+            <h3 class="label">Típus:</h3>
+            <mat-form-field appearance="fill">
+                <input matInput
+                    formControlName="type"
+                    placeholder="Lesson title">
+            </mat-form-field>
+        </div>
+        <div class="displayRow">
+            <h3 class="label">Prioritás:</h3>
+            <mat-form-field appearance="fill">
+                <input matInput
+                    formControlName="priority"
+                    placeholder="Lesson title">
+            </mat-form-field>
+        </div>
+        <div class="displayRow">
+            <h3 class="label">Üzenet:</h3>
+            <mat-form-field appearance="fill">
+                <input matInput
+                    formControlName="message"
+                    placeholder="Lesson title">
+            </mat-form-field>
+        </div>
+        <div class="displayRow">
+            <h3 class="label">Javítás:</h3>
+            <mat-form-field appearance="fill">
+                <input matInput
+                    formControlName="fix"
+                    placeholder="Lesson title">
+            </mat-form-field>
+        </div>
+    
+    </div>
+
+</div>
+<button mat-button class="button" (click)="onSubmit()">Létrehozás</button>
+

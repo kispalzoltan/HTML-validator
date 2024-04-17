@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ValidatorService } from '../services/validator.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { DataSharingService } from '../services/data-sharing.service';
+import { UserService } from '../services/user.service';
 
 
 
@@ -19,7 +21,11 @@ export class UploadComponent implements OnInit {
   favoriteColorControl = new FormControl('');
 
 
-  constructor(private validatorService: ValidatorService) { }
+  constructor(
+    private validatorService: ValidatorService,
+    private sharingData: DataSharingService,
+    private userService: UserService
+    ) { }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -28,24 +34,43 @@ export class UploadComponent implements OnInit {
     this.favoriteColorControl.valueChanges.subscribe(()=>{
       console.log(this.favoriteColorControl.value)
     })
+
+    this.loadUsers();
     
   }
 
+  loadUsers(): void {
+    this.userService.getUsers().subscribe(
+      (users: any) => {
+       console.log(users)
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+      }
+    );
+  }
+
   validateOnClick(){
+
     console.log("validate")
     this.htmlContent = this.favoriteColorControl.value ?? "";
     this.validateHTML();
   }
 
   validateHTML() {
-    this.validatorService.validateHTML(this.htmlContent).subscribe(
-      response => {
+    console.log(this.validatorService.applyFilter(this.htmlContent))
+
+
+
+    this.validatorService.validateHTML(this.htmlContent).subscribe({
+      next: (response) => {
         this.validationResponse = response;
         console.log('Validation Result:', response);
+        this.sharingData.setSharedData(this.validationResponse.messages)
       },
-      error => {
-        console.error('Validation Error:', error);
+      error: (e) => {
+        console.error('Validation Error:', e);
       }
-    );
+    });
   }
 }

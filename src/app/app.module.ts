@@ -18,9 +18,14 @@ import {MatTableModule} from '@angular/material/table';
 import { HtmlErrorDetailsComponentComponent } from './html-error-details-component/html-error-details-component.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AihelpComponent } from './aihelp/aihelp.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './components/login/login.component';
 
-
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+import { AngularFireModule } from '@angular/fire/compat';
+import { TokenInterceptor } from './token.interceptor';
+import { RuleCreatorComponent } from './components/rule-creator/rule-creator.component';
+import { firebaseConfig } from './firebase';
 
 @NgModule({
   declarations: [
@@ -29,7 +34,9 @@ import { HttpClientModule } from '@angular/common/http';
     UploadComponent,
     ControlPanelComponent,
     HtmlErrorDetailsComponentComponent,
-    AihelpComponent
+    AihelpComponent,
+    LoginComponent,
+    RuleCreatorComponent
   ],
   imports: [
     BrowserModule,
@@ -46,8 +53,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     MatDialogModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule, 
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
-interface W3CValidationMessage {
+export interface W3CValidationMessage {
     type: string;
-    subType: string;
+    subType?: string;
     lastLine: number;
     lastColumn: number;
     firstColumn: number;

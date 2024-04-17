@@ -1,0 +1,44 @@
+.wrapper{
+    padding: 10px;
+}
+.wrapper {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+.displayRow{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+mat-form-field .mat-mdc-form-field-subscript-wrapper{
+    height: 0px !important;
+}
+  .header-wrapper {
+    margin-bottom: 20px;
+  }
+  
+  
+  .label {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .mat-form-field {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .remove {
+    margin-left: 10px;
+  }
+  
+  .button {
+    margin-top: 20px;
+  }
