@@ -58,7 +58,7 @@ export class ControlPanelComponent implements OnInit {
   getUserRules(){
     this.ownRuleService.getOwnRule(localStorage.getItem("email")!).subscribe({
       next:(value) =>{
-          console.log(value)
+          console.log("value: "+value)
           this.ownRules = value
       },
       error(err) {
