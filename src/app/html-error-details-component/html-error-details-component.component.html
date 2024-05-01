@@ -1,10 +1,16 @@
-<h2>{{data.rowData.name}} Hiba részletek</h2>
+<h2> Hiba részletek</h2>
 <div class="errorDetailsContainer">
     <div class="insideContainer">
-        <h3>HTML forráskód részlet</h3>
+        <h3 class="boxTitle">HTML forráskód részlet</h3>
+        <div class="codeBlock">
+            <pre><code class="language-html" [innerHTML]="this.highlightedCode"></code></pre>
+        </div>
     </div>
     <div class="insideContainer">
         <h3>Egy lehetséges javítás</h3>
+        <div class="codeBlock">
+            <pre><code class="language-html" [innerHTML]="this.highlightedFix"></code></pre>
+        </div>
     </div>
     <div class="insideContainer">
         <h3>ChatGPT segítségkérés</h3>

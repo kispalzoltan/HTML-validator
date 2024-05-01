@@ -4,12 +4,20 @@
 .wrapper {
     width: 80%;
     margin: 0 auto;
+    margin-top: 10px;
+    background-color: #a7a7a7;
   }
   
 .displayRow{
     display: flex;
     flex-direction: row;
     gap: 20px;
+    width: 100%;
+
+    mat-form-field{
+      width: 50%;
+
+    }
 }
 mat-form-field .mat-mdc-form-field-subscript-wrapper{
     height: 0px !important;
@@ -27,7 +35,6 @@ mat-form-field .mat-mdc-form-field-subscript-wrapper{
   .input-wrapper {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
   }
   
   .mat-form-field {
@@ -37,8 +44,65 @@ mat-form-field .mat-mdc-form-field-subscript-wrapper{
   
   .remove {
     margin-left: 10px;
+    background-color: #df6c6c;
+    height: 61px;
+    top: -10px;
   }
   
-  .button {
+  .addbutton {
     margin-top: 20px;
+    width: 100%;
+    background-color: #929292;
   }
+
+  .ruleCreatorTable {
+    width: 100%;
+    border-collapse: collapse;
+    width: 1200px;
+    height:70%;
+    border: 0px;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+.fullWidth{
+  width: 100%;
+}
+.textareaHeight{
+height: 90%;
+}
+
+.radioButtons{
+  display: flex;
+  flex-direction: row;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+#radio-group-label{
+  font-size: large;
+  color: aliceblue;
+}
+mat-icon{
+  margin-right: 0px; 
+  margin-left: 0px; 
+  margin-right: 0px; 
+
+}
+
+.header{
+  margin: 0px;
+}
+.rightSide{
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.submitbutton{
+
+  background-color: #4f86ec;
+  height: 60px;
+}

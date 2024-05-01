@@ -1,4 +1,4 @@
-<div class="wrapper">
+<!-- <div class="wrapper">
     <div class="header-wrapper">
       <h2 class="header">Saját szabály létrehozása</h2>
     </div>
@@ -73,6 +73,94 @@
     
     </div>
 
-</div>
-<button mat-button class="button" (click)="onSubmit()">Létrehozás</button>
+</div> -->
+<div class="wrapper">
+    <h2 class="header">Saját szabály létrehozása</h2>
+<table class="ruleCreatorTable" [formGroup]="form">
+    <tr>
+        <td colspan="2">
+            <mat-form-field appearance="fill" class="fullWidth">
+                <mat-label>Szabály neve</mat-label>
+                <input matInput formControlName="ruleName">
+            </mat-form-field>
+        </td>
+        <td rowspan="6" style="width: 467px;">
+            <div class="rightSide">
+                <mat-form-field appearance="fill" class="fullWidth textareaHeight">
+                    <mat-label>Javítás</mat-label>
+                    <textarea matInput formControlName="fix" ></textarea>
+                </mat-form-field>
+                <button mat-raised-button class="submitbutton" (click)="onSubmit()">Létrehozás</button>
+            </div>  
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+            <mat-form-field appearance="fill" class="fullWidth">
+                <mat-label>HTML tag neve</mat-label>
+                <input matInput formControlName="tagName" placeholder="pl: img">
+            </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td >
+            <div formArrayName="attributes">
+                <div class="input-wrapper" *ngFor="let attribute of attributes?.controls; let i = index">
+                   <div [formGroupName]="i" class="displayRow">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Atributum neve:</mat-label>
+                            <input matInput
+                                formControlName="attributeName"
+                                placeholder="pl: src">
+                        </mat-form-field>
+                       
+                        <mat-form-field appearance="fill">
+                            <mat-label>Atributum értéke:</mat-label>
+                            <input matInput
+                                formControlName="attributeValue"
+                                placeholder="pl: /assets/public">
+                        </mat-form-field>
+                    </div>
+        
+                <button mat-raised-button class="remove" (click)="removeAtribute(i)"><mat-icon>delete</mat-icon></button>
+        
+                  </div>
+                  <button mat-raised-button class="addbutton" (click)="addAtribute()">hozzáadás</button>
+               </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+            <mat-form-field appearance="fill" class="fullWidth">
+                <mat-label>Hiba típusa</mat-label>
+                <select matNativeControl  formControlName="type">
+                  <option value="info">Info</option>
+                  <option value="warning">Warning</option>
+                  <option value="Error">Error</option>
+                </select>
+              </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+            <label id="radio-group-label">Prioritás</label>
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="radioButtons" formControlName="priority">
+                <div *ngFor="let item of [].constructor(5); let i = index"  >
+                    <mat-radio-button class="example-radio-button" [value]="i+1">{{i+1}}</mat-radio-button>
+                </div>
+            </mat-radio-group>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+            <mat-form-field appearance="fill" class="fullWidth">
+                <mat-label>Üzenet</mat-label>
+                <textarea matInput formControlName="fix" 
+                formControlName="message"
+                    placeholder="Mi a hiba forrása"></textarea>
+            </mat-form-field>
+        </td>
+      </tr>
+  </table>
 
+</div>

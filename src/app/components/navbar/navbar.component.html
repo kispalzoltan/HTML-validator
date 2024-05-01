@@ -4,9 +4,9 @@
     
       <button mat-raised-button class="nav-button" routerLink="/uploadhtml">Feltöltés</button>
       <button mat-raised-button class="nav-button" routerLink="/controlPanel">Vizsgálat eredménye</button>
-      <button mat-raised-button class="nav-button" routerLink="/aiHelp">AI segítség</button>
+      <button *ngIf="isAuth" mat-raised-button class="nav-button" routerLink="/aiHelp">AI segítség</button>
       <span class="spacer"></span>
-      <button mat-raised-button class="nav-button">Regisztráció</button>
+      <button *ngIf="isAuth" mat-raised-button class="nav-button" (click)="logout()">Kilépés</button>
       <button mat-raised-button class="nav-button" routerLink="/login">Bejelentkezés</button>
     </mat-toolbar-row>
   </mat-toolbar>

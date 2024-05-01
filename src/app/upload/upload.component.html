@@ -1,19 +1,44 @@
 <div class="background">
-<div class="container">
-    <div class="upload-container">
+  <div class="container">
+    <div [ngClass]="{
+      'upload-container': this.isUrl || this.isFile,
+      'upload-container_text': this.isText,
+      
+    }">
       <h1 class="mainText">HTML SUPPORT</h1>
-      <div class="upload-inside">
-      <form class="example-form">
-      <mat-form-field class="example-full-width">
-        <mat-label>Illesszen be egy html szöveget, vagy töltsön fel egy fájlt </mat-label>
-        <textarea type="text" [formControl]="favoriteColorControl" matInput placeholder="Ex. It makes me feel..."></textarea>
-      </mat-form-field>
-    </form>
-    <mat-icon>upload</mat-icon>
-    </div>
-    <div class="button-container">
-      <button mat-raised-button class="analysis-button" (click)="validateOnClick()">Elemzés</button>
-    </div>
+      <div *ngIf="this.isUrl" class="upload-inside">
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <mat-label>Illesszen be egy html szöveget, vagy töltsön fel egy fájlt </mat-label>
+            <textarea type="text" [formControl]="urlControl" matInput placeholder="Ex. It makes me feel..."></textarea>
+          </mat-form-field>
+        </form>
+      </div>
+      <div *ngIf="this.isText" class="upload-inside_text">
+        <form class="example-form_text">
+          <mat-form-field class="example-full-width_text">
+            <mat-label>Illesszen be egy html szöveget, vagy töltsön fel egy fájlt </mat-label>
+            <textarea type="text" [formControl]="favoriteColorControl" placeholder="Ex. It makes me feel..."></textarea>
+          </mat-form-field>
+        </form>
+      </div>
+      <div *ngIf="this.isFile" class="upload-inside_file">
+        <form class="example-form">
+          <mat-label>Válassza ki a feltölteni kívánt fájlt </mat-label>
+          <input type="file" [formControl]="fileControl" (change)="onFileSelected($event)">
+        </form>
+      </div>
+      <div class="uploadTypes">
+        <button mat-mini-fab (click)="selectUploadType('url')"><mat-icon>language</mat-icon></button>
+        <button mat-mini-fab (click)="selectUploadType('file')"><mat-icon> insert_drive_file</mat-icon></button>
+        <button mat-mini-fab (click)="selectUploadType('txt')"><mat-icon> short_text</mat-icon></button>
+      </div>
+  
+      <div class="button-container">
+        <button mat-raised-button class="analysis-button" (click)="validateOnClick()">Elemzés</button>
+        
+      </div>
 </div>
+     
   </div>
 </div>

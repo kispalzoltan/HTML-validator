@@ -26,6 +26,17 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { TokenInterceptor } from './token.interceptor';
 import { RuleCreatorComponent } from './components/rule-creator/rule-creator.component';
 import { firebaseConfig } from './firebase';
+import { OwnRuleGroupCreatorComponent } from './components/own-rule-group-creator/own-rule-group-creator.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { HighlightJsModule } from 'ngx-highlight-js';
+import { HighlightJsDirective } from 'ngx-highlight-js';
+import { ToastrModule } from 'ngx-toastr';
+import {MatRadioModule} from '@angular/material/radio';
+import { NgApexchartsModule } from 'ng-apexcharts';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -36,7 +47,8 @@ import { firebaseConfig } from './firebase';
     HtmlErrorDetailsComponentComponent,
     AihelpComponent,
     LoginComponent,
-    RuleCreatorComponent
+    RuleCreatorComponent,
+    OwnRuleGroupCreatorComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +66,13 @@ import { firebaseConfig } from './firebase';
     MatDialogModule,
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule, 
+    AngularFireAuthModule,
+    MatCheckboxModule,
+    HighlightJsModule,
+    HighlightJsDirective,
+    ToastrModule.forRoot(),
+    MatRadioModule,
+    NgApexchartsModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },],
   bootstrap: [AppComponent]

@@ -10,6 +10,7 @@ const routes: Routes = [
   {path: 'controlPanel', component: ControlPanelComponent},
   {path: 'aiHelp', component: AihelpComponent},
   {path: 'login', component: LoginComponent},
+  {path: '', component: UploadComponent},
 
 ];
 

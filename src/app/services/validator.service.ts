@@ -5,6 +5,7 @@ import { W3CValidationMessage } from '../interface/W3CValidationMessage';
 import * as cheerio from 'cheerio';
 import * as fs from 'fs';
 import * as htmlparser2 from 'htmlparser2';
+import { OwnRule } from '../interface/OwnRule';
 @Injectable({
   providedIn: 'root'
 })
@@ -37,21 +38,32 @@ export class ValidatorService {
     return this.http.post<any>('https://validator.w3.org/nu/?out=json', htmlContent, { headers });
   }
 
-  applyFilter(htmlDoc:string) {
-    let result = true;
+  applyFilter(htmlDoc:string, rule:OwnRule):any {
+    let returnValue: { rule: OwnRule; code: string; }[] = []
+    
     // Felhasználó által megadott értékek alapján szűrjük a HTML tartalmat
 
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlDoc, 'text/html');
-    const elements = doc.querySelectorAll(this.tagName);
+    const elements = doc.querySelectorAll(rule.tagName);
     console.log(elements)
     
     elements.forEach(element => {
-      console.log(element.outerHTML)
-      console.log(element.getAttribute(this.attributeName) && element.getAttribute(this.attributeName)?.includes( this.attributeValue))
-      result = (element.getAttribute(this.attributeName) && element.getAttribute(this.attributeName)?.includes( this.attributeValue))? true : false
+      let htmlBlock = element.outerHTML
+
+        let valid = true;
+        rule.attributes.forEach((attribue) => {
+          if(!((element.getAttribute(attribue?.attributeName) && element.getAttribute(attribue?.attributeName)?.includes( attribue?.attributeValue)) || 
+          (element.getAttribute(attribue?.attributeName) && attribue.attributeValue == ""))){
+            valid = false;
+          }
+        })
+        if (!valid){
+          returnValue.push({rule:rule,code:htmlBlock})
+        }
+      
     })
-    return result;
+    return returnValue;
   }
 
   findTag(html: string, tagName: string): { tag: string, lineNumber: number }[] {
@@ -76,4 +88,11 @@ export class ValidatorService {
     // Ellenőrizzük, hogy az elem rendelkezik-e az adott attribútummal és értékkel
     return element.getAttribute(this.attributeName) === this.attributeValue;
   }
+
+
+  fetchHtml(url: string): Observable<any> {
+    // Használd az Angular HttpClient-et az HTTP kérés elküldéséhez
+    return this.http.get<string>(`http://localhost:8080/fetch-html?url=${url}`, { responseType: 'json' });
+  }
+
 }

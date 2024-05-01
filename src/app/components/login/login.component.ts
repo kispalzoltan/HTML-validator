@@ -9,35 +9,63 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  signupForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder,private authService: AuthService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+
+    this.signupForm = this.formBuilder.group({
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
-  onSubmit(): void {
-    if (this.loginForm.valid) {
-      const username = this.loginForm?.get('username')?.value;
-      const password = this.loginForm?.get('password')?.value;
+  onSignup(){
+    if (this.signupForm.valid) {
+      const email = this.signupForm?.get('email')?.value;
+      const password = this.signupForm?.get('password')?.value;
       
-      this.login(username, password)
+      this.signUp(email, password)
 
-      console.log('Felhasználónév:', username);
+      //console.log(this.isAuthenticated)
+
+      console.log('Felhasználónév:', email);
       console.log('Jelszó:', password);
     } else {
       // Ha a form érvénytelen, megjeleníthetsz hibaüzeneteket vagy más visszajelzést a felhasználónak
     }
   }
 
-  get isAuthenticated(): boolean {
-    return this.authService.isAuthenticated;
+  onLogin(): void {
+    if (this.loginForm.valid) {
+      const email = this.loginForm?.get('email')?.value;
+      const password = this.loginForm?.get('password')?.value;
+      
+      this.login(email, password)
+
+      //console.log(this.isAuthenticated)
+
+      console.log('Felhasználónév:', email);
+      console.log('Jelszó:', password);
+    } else {
+      // Ha a form érvénytelen, megjeleníthetsz hibaüzeneteket vagy más visszajelzést a felhasználónak
+    }
   }
+
+  /*get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated;
+  }*/
 
   login(email: string, password: string) {
     this.authService.login(email, password);
+  }
+
+  signUp(email: string, password: string){
+    this.authService.signUp(email, password);
   }
 }

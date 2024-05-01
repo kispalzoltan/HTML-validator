@@ -13,13 +13,43 @@
     background-color: rgba(0, 0, 0, 0.103);
     flex-direction: column;
     width: 600px;
-    height: 200px;
+    height: 220px;
     border-radius: 90px;
     justify-content: center;
     box-shadow: 2px 4px 71px 14px rgba(0,0,0,0.84);
 
 
   }
+  .upload-container_text {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.103);
+    flex-direction: column;
+    width: 600px;
+    height: 220px;
+    border-radius: 90px;
+    justify-content: center;
+    box-shadow: 2px 4px 71px 14px rgba(0,0,0,0.84);
+    height: 100%;
+    margin-top: 10px;
+  }
+
+  .example-full-width_text{
+    width: 100%;
+    height: 100%;
+  }
+
+  .example-form_text textarea {
+    color: black;
+    width: 537px;
+    height: 505px;
+    border: 0px;
+    background-color: aliceblue;
+
+}
+
+
 
   .upload-inside{
     display: flex;
@@ -33,13 +63,47 @@
     height: 40px;
   }
   
+  .upload-inside_text{
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    flex-direction: row;
+    width: 97%;
+    background-color: aliceblue;
+    margin-top: 14px;
+    border-radius: 79px;
+    height: 571px;
+  }
+  
+  .upload-inside_file{
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    flex-direction: row;
+    width: 97%;
+    margin-top: 14px;
+    border-radius: 79px;
+
+  }
+
+  .upload-inside_file .example-form{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+
+    mat-label{
+      font-size: x-large;
+      margin-bottom: 16px;
+    }
+  }
 
   .search-input {
     flex: 1; /* A beviteli mező kitölti a rendelkezésre álló helyet */
   }
   
   .button-container {
-    margin-top: 20px;
+    margin-top: 0px;
   }
   
   .analysis-button,
@@ -50,6 +114,26 @@
   .example-form {
     min-width: 150px;
     width: 100%;
+  }
+
+  .example-form_file {
+    min-width: 150px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+  }
+
+  .example-form_file mat-label{
+    font-size: x-large;
+    margin-bottom: 16px;
+  }
+
+  .example-form_text {
+    min-width: 150px;
+    width: 100%;
+    height: 100%;
   }
   
   .example-full-width {
@@ -106,4 +190,13 @@
   font-size: 55px;
   font-weight: bold;
   text-shadow: 10px 7px 10px rgb(49 48 46 / 59%);
+}
+
+.uploadTypes{
+  float: right;
+  margin-left: auto;
+  margin-right: 30px;
+  gap: 10px;
+  display: flex;
+  padding-top: 5px;
 }

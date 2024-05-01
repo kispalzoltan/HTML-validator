@@ -1,0 +1,49 @@
+.ruleTable{
+    width: 50%;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    overflow-y: auto;
+
+  }
+  .ruleTableID{
+    width: 30px;
+  }
+  .ruleTableName{
+    width: 70%;
+  }
+  .ruleTableDel{
+    width: 80px;
+  }
+
+  tr {
+    background-color: #dddddd3b;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #ffffff10;
+  }
+  header{
+    width: 100%;
+    border-bottom: solid white 2px;
+  }
+
+  .ruleGroupContailer{
+    display: flex;
+    flex-direction: row;
+
+  }
+  .left{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .right{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }

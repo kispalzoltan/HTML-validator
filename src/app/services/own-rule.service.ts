@@ -21,11 +21,20 @@ export class OwnRuleService {
 
   saveOwnRule(email: string, htmlContent: any){
     const body = { email: email, ownRule: htmlContent};
-    return this.http.post<any>(this.BASE_URL+'saveOwnRule', body);
+    return this.http.post<any>(this.BASE_URL+'saveOwnRule', body,{responseType:'json'});
   }
 
   deleteOwnRule(email: string, htmlContent: any){
     const body = { email: email, ownRule: htmlContent};
     return this.http.post<any>(this.BASE_URL+'deleteOwnRule', body);
+  }
+
+  saveOwnRuleGroup(email: string, htmlContent: any){
+    const body = { email: email, ownRuleGroup: htmlContent};
+    return this.http.post<any>(this.BASE_URL+'saveOwnRuleGroups', body);
+  }
+
+  getOwnRuleGroup(email: string){
+    return this.http.post<any>(this.BASE_URL+'getOwnRuleGroups', email);
   }
 }

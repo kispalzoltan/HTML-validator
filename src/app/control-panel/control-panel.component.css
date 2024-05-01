@@ -57,7 +57,7 @@
     padding-top: 10px ;
   }
 
-  .ruleTable{
+  .ruleTable, .activeRuleTable{
     max-height: 174px;
     width: 100%;
     font-family: arial, sans-serif;
@@ -66,13 +66,16 @@
 
   }
   .ruleTableID{
-    width: 10%;
+    width: 20px;
   }
   .ruleTableName{
-    width: 70%;
+    width: 110px;
   }
   .ruleTableDel{
-
+  width: 45px;
+  }
+  .checkBox{
+    width: 38px
   }
 
   tr {
@@ -93,3 +96,69 @@
     padding-right: 10px;
     padding-left: 10px;
   }
+
+  .activeRuleTable .ruleTableName{
+    width: 208px;
+  }
+
+  .analyzeBtn{
+    margin-top: 20px;
+    width: 250px;
+  }
+
+  .ownErrorTable{
+    width: 100%;
+    background-color: #424242;
+    border-collapse: collapse;
+    color: white;
+  }
+
+  .ownErrorTable tr {
+    width: 100%;
+    height: 50px;
+  }
+
+  .ownErrorTable .ownErrorId{
+    width: 5%;
+  }
+
+  .ownErrorTable .ownErrorName{
+    width: 20%;
+    text-align: center;
+  }
+
+  .ownErrorTable .ownErrorPrio{
+    width: 5%;
+    text-align: center;
+
+  }
+
+  .ownErrorTable .ownErrorType{
+    width: 5%;
+    text-align: center;
+
+  }
+  .ownErrorTable > div {
+    display: contents;
+
+  } 
+
+  .error{
+    border-left: 10px solid #ad0808;
+  }
+
+  .warning{
+    border-left: 10px solid #ddb918;
+  }
+
+  .info{
+    border-left: 10px solid #29e2f0;
+  }
+
+  .chart {
+    max-width: 380px;
+    margin: 35px auto;
+    padding: 0;
+    background-color: aliceblue;
+  }
+  

@@ -1,0 +1,48 @@
+<h1>Saját szabálycsoport létrehozása</h1>
+<div class="ruleGroupContailer">
+  <div class="left">
+    <h2>Saját szabályok</h2>
+    <table class="ruleTable">
+      <header>
+        <tr>
+          <th class="ruleTableID">ID</th>
+          <th class="ruleTableName">Szabályok</th>
+          <th class="ruleTableDel">Törlés</th>
+        </tr>
+      </header>
+      <body>
+        <tr *ngFor="let item of ownRules; index as i">
+          <td class="ruleTableID">{{i}}</td>
+          <td class="ruleTableName">{{item.ruleName}}</td>
+          <td class="ruleTableDel"><button mat-button (click)="addOwnRuleToGroup(item)">hozzáadás</button></td>
+        </tr>
+      </body>
+    </table>
+  </div>
+  <div class="right">
+    <h2>Kiválasztott szabályok</h2>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Szabálycsoport neve</mat-label>
+        <input matInput placeholder="Szabálycsoport neve" [formControl]="groupNameFormControl">
+      </mat-form-field>
+    </form>
+    <table class="ruleTable">
+      <header>
+        <tr>
+          <th class="ruleTableID">ID</th>
+          <th class="ruleTableName">Szabályok</th>
+          <th class="ruleTableDel">Törlés</th>
+        </tr>
+      </header>
+      <body>
+        <tr *ngFor="let item of selectedOwnRules; index as i">
+          <td class="ruleTableID">{{i}}</td>
+          <td class="ruleTableName">{{item.ruleName}}</td>
+          <td class="ruleTableDel"><button mat-button (click)="removeOwnRuleToGroup(item)">Törlés</button></td>
+        </tr>
+      </body>
+    </table>
+    <button mat-button (click)="createGroup()">Csoport létrehozása</button>
+  </div>
+</div>

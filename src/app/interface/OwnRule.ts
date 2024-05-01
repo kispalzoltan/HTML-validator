@@ -1,4 +1,5 @@
-import { Attribute } from "@angular/core";
+import { Attribute } from "./Attribute";
+
 
 export interface OwnRule {
     id:number,
