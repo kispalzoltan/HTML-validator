@@ -107,7 +107,6 @@ export class ValidatorService {
     const supportAttribute = !!doc.querySelector('[support]');
     const autofocusSupported = !!doc.querySelector('[autofocus]');
     const dragAndDropSupported = !!doc.querySelector('[draggable]');
-    const emailInputSupported = !!doc.querySelector('input[type=email]');
     const figureSupported = !!doc.querySelector('figure');
     const figcaptionSupported = !!doc.querySelector('figcaption');
     const footerSupported = !!doc.querySelector('footer');
@@ -133,7 +132,6 @@ export class ValidatorService {
       supportAttribute,
       autofocusSupported,
       dragAndDropSupported,
-      emailInputSupported,
       figureSupported,
       figcaptionSupported,
       footerSupported,

@@ -1,0 +1,30 @@
+.mainHTML5Container{
+    display: flex;
+    flex-direction: row;
+    height: 90%;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.block{
+    height: 100%;
+    width: calc(calc((100% / 2)) - 30px);
+    background-color: #d3d3d3;
+    margin: 5px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+.tableContainer{
+    overflow: auto;
+    height: 90%;
+}

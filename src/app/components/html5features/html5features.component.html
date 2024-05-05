@@ -1,0 +1,99 @@
+<div class="mainHTML5Container">
+    <div class="codeBlock block">
+        <h2>Feltöltött HTML állomány</h2>
+    </div>
+    
+    <div class="features block">
+        <h2>HTML 5 funkciók</h2>
+        <div class="tableContainer">
+            <h3 *ngIf="!features">Nincs feltöltött fájl</h3>
+            <table *ngIf="features">
+                <tr>
+                    <th>Funkció</th>
+                    <th>Támogatás</th>
+                </tr>
+                <tr>
+                    <td>Canvas</td>
+                    <td>{{ features.canvasSupported ? '✔️' : '❌' }}</td>
+                </tr>
+                <tr>
+                    <td>Video</td>
+                    <td>{{ features.videoSupported ? '✔️' : '❌' }}</td>
+                </tr>
+                <tr>
+                    <td>Audio</td>
+                    <td>{{ features.audioSupported ? '✔️' : '❌' }}</td>
+                </tr>
+                <tr>
+                    <td>SVG</td>
+                    <td>{{ features.svgSupported ? '✔️' : '❌' }}</td>
+                </tr>
+                <tr>
+                    <td>Doctype declaration</td>
+                    <td>{{ features.doctypeDeclaration ? '✔️' : '❌' }}</td>
+                </tr>
+                <tr>
+                    <td>Support attribute</td>
+                    <td>{{ features.supportAttribute ? '✔️' : '❌' }}</td>
+                </tr>
+                <tr>
+                    <td>Autofocus</td>
+                    <td>{{ features.autofocusSupported ? '✔️' : '❌' }}</td>
+                </tr>
+                <tr>
+                    <td>Drag and drop</td>
+                    <td>{{ features.dragAndDropSupported ? '✔️' : '❌' }}</td>
+                </tr>
+                <tr>
+                    <td>Figure</td>
+                    <td>{{ features.figureSupported ? '✔️' : '❌' }}</td>
+                </tr>
+                <tr>
+                    <td>Figcaption</td>
+                    <td>{{ features.figcaptionSupported ? '✔️' : '❌' }}</td>
+                </tr>
+                <tr>
+                    <td>Footer</td>
+                    <td>{{ features.footerSupported ? '✔️' : '❌' }}</td>
+                </tr>
+                <tr>
+                    <td>Form enhancements</td>
+                    <td>{{ features.formEnhancementsSupported ? '✔️' : '❌' }}</td>
+                </tr>
+                <tr>
+                    <td>NAV</td>
+                    <td>{{ features.navSupported ? '✔️' : '❌' }}</td>
+                </tr>
+                <tr>
+                    <td>New input types</td>
+                    <td>
+                        <ul>
+                            <li><span>Date:</span><span>{{ features.newInputTypesSupported.date ? '✔️' : '❌' }}</span></li>
+                            <li><span>Time:</span><span>{{ features.newInputTypesSupported.time ? '✔️' : '❌' }}</span></li>
+                            <li><span>Email:</span><span>{{ features.newInputTypesSupported.email ? '✔️' : '❌' }}</span></li>
+                            <li><span>Number:</span><span>{{ features.newInputTypesSupported.number ? '✔️' : '❌' }}</span></li>
+                            <li><span>Range:</span><span>{{ features.newInputTypesSupported.range ? '✔️' : '❌' }}</span></li>
+                            <li><span>Color:</span><span>{{ features.newInputTypesSupported.color ? '✔️' : '❌' }}</span></li>
+                            <li><span>Search:</span><span>{{ features.newInputTypesSupported.search ? '✔️' : '❌' }}</span></li>
+                            <li><span>Tel:</span><span>{{ features.newInputTypesSupported.tel ? '✔️' : '❌' }}</span></li>
+                            <li><span>URL:</span><span>{{ features.newInputTypesSupported.url ? '✔️' : '❌' }}</span></li>
+                            <li><span>Week:</span><span>{{ features.newInputTypesSupported.week ? '✔️' : '❌' }}</span></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Promoting accessibility</td>
+                    <td>{{ features.promotingAccessibility ? '✔️' : '❌' }}</td>
+                </tr>
+                <tr>
+                    <td>Design responsiveness</td>
+                    <td>{{ features.designResponsiveness ? '✔️' : '❌' }}</td>
+                </tr>
+                <tr>
+                    <td>Required attribute</td>
+                    <td>{{ features.requiredAttributeSupported ? '✔️' : '❌' }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -60,6 +60,7 @@ export class UploadComponent implements OnInit {
       //this.htmlContent = this.urlControl.value ?? "";
       console.log(this.sharingData.getHTMLData())
       
+      this.sharingData.setHTML5Features(this.validatorService.checkHTML5Features(this.sharingData.getHTMLData()))
       console.log(this.validatorService.checkHTML5Features(this.sharingData.getHTMLData()))
     }
     if(this.isFile){

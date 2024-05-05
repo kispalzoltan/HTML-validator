@@ -33,6 +33,7 @@ import { HighlightJsDirective } from 'ngx-highlight-js';
 import { ToastrModule } from 'ngx-toastr';
 import {MatRadioModule} from '@angular/material/radio';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { Html5featuresComponent } from './components/html5features/html5features.component';
 
 
 
@@ -48,7 +49,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     AihelpComponent,
     LoginComponent,
     RuleCreatorComponent,
-    OwnRuleGroupCreatorComponent
+    OwnRuleGroupCreatorComponent,
+    Html5featuresComponent
   ],
   imports: [
     BrowserModule,
