@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { OwnRuleService } from '../../services/own-rule.service';
+import { ToastrService } from 'ngx-toastr';
 
 interface atribute{
   attributeName: string;
@@ -42,7 +43,10 @@ export class RuleCreatorComponent implements OnInit{
     }
   ];
 
-  constructor(private fb: FormBuilder, private ownRuleService: OwnRuleService) {
+  constructor(
+    private fb: FormBuilder, 
+    private ownRuleService: OwnRuleService,
+    private toastService:ToastrService) {
     this.form = this.fb.group({
       id:[2],
       ruleName:[""],
@@ -97,10 +101,12 @@ export class RuleCreatorComponent implements OnInit{
     console.log(this.form.value);
     this.ownRuleService.saveOwnRule(localStorage.getItem("email")!,this.form.value).subscribe({
       next:(x) => {
+        this.toastService.success("Sikeresen létrehoztál egy új szabályt!")
         console.log(x)
       },
       error:(x) =>{
         console.log(x)
+        this.toastService.error("Sikertelen létrehozás!")
       }
     })
   }

@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import OpenAI from "openai";
-
+import { PerformanceService } from '../services/performance.service';
 
 
 
@@ -38,7 +38,8 @@ export class UploadComponent implements OnInit {
     private sharingData: DataSharingService,
     private userService: UserService,
     private http: HttpClient,
-     private sanitizer: DomSanitizer
+     private sanitizer: DomSanitizer,
+     private performService:PerformanceService
     ) { }
 
   async ngOnInit(): Promise<void> {
@@ -55,30 +56,32 @@ export class UploadComponent implements OnInit {
 
   validateOnClick(){
     if(this.isUrl){
-      this.uploadFetchHTML();
-      this.htmlContent = this.urlControl.value ?? "";
-      this.validateHTML();
+      this.uploadFetchHTML(this.urlControl.value ?? "");
+      //this.htmlContent = this.urlControl.value ?? "";
+      console.log(this.sharingData.getHTMLData())
+      
+      console.log(this.validatorService.checkHTML5Features(this.sharingData.getHTMLData()))
     }
     if(this.isFile){
-      this.uploadFetchHTML();
-      this.htmlContent = this.fileContent
-      this.validateHTML();
+      //this.uploadFetchHTML();
+      //this.htmlContent = this.fileContent
+      this.validateHTML(this.fileContent);
     }
     if(this.isText){
-       console.log("validate")
-    this.htmlContent = this.favoriteColorControl.value ?? "";
-    this.validateHTML();
+       console.log("validate", this.favoriteColorControl.value)
+    this.validateHTML(this.favoriteColorControl.value ?? "");
     }
 
    
   }
 
-  validateHTML() {
+  validateHTML(pureHTML:string) {
     //console.log(this.validatorService.applyFilter(this.htmlContent))
 
-    this.sharingData.setHTMLData(this.htmlContent)
+    //this.sharingData.setHTMLData(this.htmlContent)
+    console.log("htmlContent",this.htmlContent)
 
-    this.validatorService.validateHTML(this.htmlContent).subscribe({
+    this.validatorService.validateHTML(pureHTML).subscribe({
       next: (response) => {
         this.validationResponse = response;
         console.log('Validation Result:', response);
@@ -113,11 +116,13 @@ export class UploadComponent implements OnInit {
     }
   }
 
-  uploadFetchHTML() {
-   this.validatorService.fetchHtml(this.urlControl.value ?? "").subscribe({
+  uploadFetchHTML(url:string) {
+   this.validatorService.fetchHtml(url).subscribe({
     next:(value) => {
-      this.sharingData.setHTMLData(value?.html)
+      console.log(value)
+      this.sharingData.setHTMLData(value?.data)
         console.log(value)
+      this.validateHTML(value?.data);
     },
     error:(err) => {
         console.log("Hiba a uploadFetchHTML: ", err)
@@ -135,5 +140,7 @@ export class UploadComponent implements OnInit {
 
     reader.readAsText(file);
   }
+
+
 
 }

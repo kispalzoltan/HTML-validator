@@ -21,14 +21,6 @@ export type ChartOptions = {
   labels: any;
 };
 
-export type BarChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  dataLabels: ApexDataLabels;
-  plotOptions: ApexPlotOptions;
-  xaxis: ApexXAxis;
-};
-
 
 interface activeFilter{
   type:string;
@@ -44,14 +36,18 @@ export class ControlPanelComponent implements OnInit {
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions!: Partial<ChartOptions>;
 
-  @ViewChild("barChart") barChart!: BarChartOptions;
-  public barChartOptions!: Partial<BarChartOptions>;
+  @ViewChild("typechart") typechart!: ChartComponent;
+  public typechartOptions!: Partial<ChartOptions>;
+
 
   displayedColumns: string[] = ['position', 'name', 'priority'];
 
   resultTableData: W3CValidationMessage[] = [] //w3c hibák
   errors: any[] = [] // saját hibák
-  tempSummOwnRuleErrors = 0;
+ 
+  infos_statistics:number = 0;
+  warnings_statistics:number = 0;
+  errors_statistics:number = 0;
 
   ownRules: OwnRule[] = [];
   ownRuleGroups: OwnRuleGroup[] = [];
@@ -62,6 +58,7 @@ export class ControlPanelComponent implements OnInit {
 
   selectedRulesForm: FormGroup ;
   selectedRuleGroupsForm: FormGroup;
+  tempSummOwnRuleErrors: number = 0;
   constructor(
     public dialog: MatDialog,
     private sharingData:DataSharingService, 
@@ -78,9 +75,8 @@ export class ControlPanelComponent implements OnInit {
     this.resultTableData = this.sharingData.getSharedData().messages
 
     this.calculatePiechart();
-    this.calculateBarchart();
-    const top5Messages = this.topNMostCommonMessages(this.resultTableData, 5);
-    console.log(top5Messages);
+    this.calculateTypePiechart();
+
 
     this.getUserRules()
     this.getOwnRuleGroups()
@@ -202,6 +198,7 @@ console.log(i)
 
     })
     this.calculatePiechart()
+    this.calculateTypePiechart()
     console.log(this.errors)
   }
 
@@ -212,7 +209,8 @@ console.log(i)
     this.chartOptions = {
       series: [this.resultTableData.length,this.tempSummOwnRuleErrors as unknown as number],
       chart: {
-        type: "donut"
+        type: "donut",
+        foreColor: '#ffffff'
       },
       labels: ["W3c sabályok","Saját szabályok"],
       responsive: [
@@ -230,40 +228,68 @@ console.log(i)
       ]
     };
   }
-  calculateBarchart(){
-    this.barChartOptions = {
-      series: [
-        {
-          name: "basic",
-          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      xaxis: {
-        categories: [
-          "South Korea",
-          "Canada",
-          "United Kingdom",
-          "Netherlands",
-          "Italy",
-          "France",
-          "Japan",
-          "United States",
-          "China",
-          "Germany"
-        ]
+  
+  calculateTypePiechart(){
+    this.infos_statistics = 0
+    this.warnings_statistics = 0
+    this.errors_statistics = 0
+    this.errors.forEach(x => {
+      x.forEach((element:any) => {
+        console.log(element?.rule?.type)
+          switch (element?.rule?.type) {
+            case "info":
+              this.infos_statistics++;
+              break;
+            case "warning":
+              this.warnings_statistics++;
+              break;
+            case "error":
+              this.errors_statistics++;
+              break;
+            default:
+              break;
+          }
+         
+      });
+    })
+
+    this.resultTableData.forEach(x => {
+      switch (x?.type) {
+        case "info":
+          this.infos_statistics++;
+          break;
+        case "warning":
+          this.warnings_statistics++;
+          break;
+        case "error":
+          this.errors_statistics++;
+          break;
+        default:
+          break;
       }
+     
+    })
+    
+    this.typechartOptions = {
+      series: [this.infos_statistics, this.warnings_statistics,this.errors_statistics ],
+      chart: {
+        type: "donut",
+        foreColor: '#ffffff'
+      },
+      labels: ["info","warning","error"],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
     };
   }
 

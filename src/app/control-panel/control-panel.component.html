@@ -6,24 +6,27 @@
       </mat-panel-title>
 
     </mat-expansion-panel-header>
-      <div class="chart">
-        <apx-chart
-          [series]="chartOptions.series"
-          [chart]="chartOptions.chart"
-          [labels]="chartOptions.labels"
-          [responsive]="chartOptions.responsive"
-        ></apx-chart>
+    <div class="chartContainer">
+        <div id="chart" class="chart">
+          <h2>W3C és saját szabályok</h2>
+          <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [labels]="chartOptions.labels"
+            [responsive]="chartOptions.responsive"
+          ></apx-chart>
+        </div>
+        <div id="typechart" class="chart">
+          <h2>Találatok típusai</h2>
+          <apx-chart
+            [series]="typechartOptions.series"
+            [chart]="typechartOptions.chart"
+            [labels]="typechartOptions.labels"
+            [responsive]="typechartOptions.responsive"
+          ></apx-chart>
+        </div>
       </div>
 
-      <div class="chart">
-        <apx-chart
-          [series]="barChartOptions.series"
-          [chart]="barChartOptions.chart"
-          [dataLabels]="barChartOptions.dataLabels"
-          [plotOptions]="barChartOptions.plotOptions"
-          [xaxis]="barChartOptions.xaxis"
-        ></apx-chart>
-      </div>
 </mat-expansion-panel>
 
 

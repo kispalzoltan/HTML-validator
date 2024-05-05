@@ -27,6 +27,7 @@
     "highlight.js": "^11.9.0",
     "htmlparser2": "^9.1.0",
     "jsonwebtoken": "^9.0.2",
+    "modernizr": "^3.13.0",
     "ng-apexcharts": "^1.10.0",
     "ngx-highlight-js": "^17.0.0",
     "ngx-toastr": "^18.0.0",

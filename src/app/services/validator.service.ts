@@ -91,8 +91,59 @@ export class ValidatorService {
 
 
   fetchHtml(url: string): Observable<any> {
-    // Használd az Angular HttpClient-et az HTTP kérés elküldéséhez
-    return this.http.get<string>(`http://localhost:8080/fetch-html?url=${url}`, { responseType: 'json' });
+    return this.http.get<string>(`http://localhost:8080/public/fetch-html?url=${url}`, { responseType: 'json' });
   }
+
+
+  checkHTML5Features(htmlDoc:string) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlDoc, 'text/html');
+    console.log(doc)
+    const canvasSupported = !!doc.querySelector('canvas');
+    const videoSupported = !!doc.querySelector('video');
+    const audioSupported = !!doc.querySelector('audio');
+    const svgSupported = !!doc.querySelector('svg');
+    const doctypeDeclaration = !!doc.doctype;
+    const supportAttribute = !!doc.querySelector('[support]');
+    const autofocusSupported = !!doc.querySelector('[autofocus]');
+    const dragAndDropSupported = !!doc.querySelector('[draggable]');
+    const emailInputSupported = !!doc.querySelector('input[type=email]');
+    const figureSupported = !!doc.querySelector('figure');
+    const figcaptionSupported = !!doc.querySelector('figcaption');
+    const footerSupported = !!doc.querySelector('footer');
+    const formEnhancementsSupported = !!doc.querySelector('input[type=date]');
+    const navSupported = !!doc.querySelector('nav');
+    const promotingAccessibility = !!doc.querySelector('[aria-label]');
+    const designResponsiveness = htmlDoc.includes('(min-width: 768px)');
+    const requiredAttributeSupported = !!doc.querySelector('input[required]');
+
+    const inputTypes = ['date', 'time', 'email', 'number', 'range', 'color', 'search', 'tel', 'url', 'week'];
+    const newInputTypesSupported = inputTypes.reduce((acc:any, type) => {
+        acc[type] = !!doc.querySelector(`input[type="${type}"]`);
+        return acc;
+    }, {});
+
+    // Visszatérünk az eredményekkel
+    return {
+      canvasSupported,
+      videoSupported,
+      audioSupported,
+      svgSupported,
+      doctypeDeclaration,
+      supportAttribute,
+      autofocusSupported,
+      dragAndDropSupported,
+      emailInputSupported,
+      figureSupported,
+      figcaptionSupported,
+      footerSupported,
+      formEnhancementsSupported,
+      navSupported,
+      newInputTypesSupported,
+      promotingAccessibility,
+      designResponsiveness,
+      requiredAttributeSupported
+  };
+}
 
 }

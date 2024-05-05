@@ -157,8 +157,13 @@
 
   .chart {
     max-width: 380px;
+    min-width: 380px;
     margin: 35px auto;
     padding: 0;
-    background-color: aliceblue;
+
+  }
+  .chartContainer{
+    display: flex;
+    flex-direction: row;
   }
   
