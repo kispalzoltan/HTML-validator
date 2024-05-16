@@ -12,6 +12,7 @@ import { OwnRuleGroup } from '../interface/OwnRuleGroup';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ValidatorService } from '../services/validator.service';
 import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexPlotOptions, ApexResponsive, ApexXAxis, ChartComponent } from 'ng-apexcharts';
+import { ToastrService } from 'ngx-toastr';
 
 
 export type ChartOptions = {
@@ -64,7 +65,8 @@ export class ControlPanelComponent implements OnInit {
     private sharingData:DataSharingService, 
     private ownRuleService:OwnRuleService,
     private fb: FormBuilder,
-    private validatorService:ValidatorService){
+    private validatorService:ValidatorService,
+    private toastrService:ToastrService){
 
       this.selectedRulesForm = this.fb.group({});
       this.selectedRuleGroupsForm = this.fb.group({});
@@ -107,7 +109,14 @@ export class ControlPanelComponent implements OnInit {
       height: '80%',
       width: '80%',
     });
+
+    this.dialog.afterAllClosed.subscribe(result => {
+      this.getOwnRuleGroups();
+      console.log('A dialógusablak bezárásának eredménye:', result);
+      // Itt tudja feldolgozni a dialógusablak bezárásának eredményét
+    });
   }
+  
 
   getUserRules(){
     this.ownRuleService.getOwnRule(localStorage.getItem("email")!).subscribe({
@@ -135,13 +144,33 @@ export class ControlPanelComponent implements OnInit {
   deleteOwnRule(rule:OwnRule){
     this.ownRuleService.deleteOwnRule(localStorage.getItem("email")!, rule).subscribe({
       next:(value) =>{
-          console.log(value)
+        this.getUserRules()
+        console.log(value)
+        this.toastrService.success(rule.ruleName+" szabály törölve!")
       },
       error:(err) => {
           console.log("deleteOwnRule hibát kapott: "+err)
       },
     })
   }
+
+  deleteOwnRuleGroup(group:OwnRuleGroup){
+    console.log(".............",group)
+    this.ownRuleService.deleteOwnRuleGroup(localStorage.getItem("email")!, group).subscribe({
+      next:(value) =>{
+          console.log(value)
+          this.getOwnRuleGroups()
+          this.toastrService.success(group.groupName+" szabálycsoport törölve!")
+      },
+      error:(err) => {
+          console.log("deleteOwnRule hibát kapott: "+err)
+      },
+      complete:() =>{
+        this.getOwnRuleGroups();
+      }
+    })
+  }
+
 
   getOwnRuleGroups(){
     this.ownRuleService.getOwnRuleGroup(localStorage.getItem("email")!).subscribe({
@@ -317,5 +346,7 @@ topNMostCommonMessages(messages: W3CValidationMessage[], n: number): { name: str
 
   return topNMessages;
 }
+
+
   
 }

@@ -3,6 +3,7 @@ import { OwnRuleService } from '../../services/own-rule.service';
 import { OwnRule } from '../../interface/OwnRule';
 import { FormControl, Validators } from '@angular/forms';
 import { OwnRuleGroup } from '../../interface/OwnRuleGroup';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-own-rule-group-creator',
@@ -14,7 +15,7 @@ export class OwnRuleGroupCreatorComponent implements OnInit {
   selectedOwnRules: OwnRule[] = [];
   groupNameFormControl = new FormControl('', [Validators.required]);
 
-  constructor(private ownRuleService:OwnRuleService){}
+  constructor(public dialog: MatDialogRef<OwnRuleGroupCreatorComponent>,private ownRuleService:OwnRuleService){}
 
   
   ngOnInit(): void {

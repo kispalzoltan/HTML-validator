@@ -28,3 +28,10 @@ th, td {
     overflow: auto;
     height: 90%;
 }
+.code{
+    height: 94%;
+    overflow: auto;
+    background-color: #252525;
+    margin: 5px;
+
+}

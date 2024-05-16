@@ -200,3 +200,6 @@
   display: flex;
   padding-top: 5px;
 }
+.mdc-text-field__input{
+  color: black !important;
+}

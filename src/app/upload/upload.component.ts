@@ -9,6 +9,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import OpenAI from "openai";
 import { PerformanceService } from '../services/performance.service';
+import { Router } from '@angular/router';
 
 
 
@@ -21,14 +22,13 @@ export class UploadComponent implements OnInit {
   isUrl: boolean = true
   isFile: boolean = false
   isText: boolean = false
+
   displayHTML:SafeHtml | undefined;
-
-
   htmlContent: string = ""; // A HTML tartalom, amit validálni szeretnél
   fileContent:string = ""
   validationResponse: any; // A validálás eredménye
 
-  favoriteColorControl = new FormControl('');
+  textareaControl = new FormControl('');
   urlControl = new FormControl('');
   fileControl = new FormControl('')
 
@@ -36,64 +36,59 @@ export class UploadComponent implements OnInit {
   constructor(
     private validatorService: ValidatorService,
     private sharingData: DataSharingService,
-    private userService: UserService,
-    private http: HttpClient,
-     private sanitizer: DomSanitizer,
-     private performService:PerformanceService
+    private router: Router
     ) { }
 
-  async ngOnInit(): Promise<void> {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-
-    this.favoriteColorControl.valueChanges.subscribe(()=>{
-      console.log(this.favoriteColorControl.value)
-    })
-
-    //this.getChatCompletion().subscribe( x => console.log(x))
-    //this.main()
+  ngOnInit() {
   }
 
+  /**
+   *check the validity type, 
+   */
   validateOnClick(){
     if(this.isUrl){
+      //when the User selected the link upload, we first have to send the url to the server
+      //and then we get back the pure html code
       this.uploadFetchHTML(this.urlControl.value ?? "");
-      //this.htmlContent = this.urlControl.value ?? "";
-      console.log(this.sharingData.getHTMLData())
-      
       this.sharingData.setHTML5Features(this.validatorService.checkHTML5Features(this.sharingData.getHTMLData()))
       console.log(this.validatorService.checkHTML5Features(this.sharingData.getHTMLData()))
+
     }
     if(this.isFile){
-      //this.uploadFetchHTML();
-      //this.htmlContent = this.fileContent
+      //at file upload we have a function its detect it and save the file content to the fileContent variable
       this.validateHTML(this.fileContent);
     }
     if(this.isText){
-       console.log("validate", this.favoriteColorControl.value)
-    this.validateHTML(this.favoriteColorControl.value ?? "");
+      //if the user selected the text input, we just reading the control value and use it the validate
+    this.validateHTML(this.textareaControl.value ?? "");
     }
-
-   
   }
 
+  /**
+   * Its validate the html document by the W3C validator
+   * @param pureHTML html code
+   */
   validateHTML(pureHTML:string) {
-    //console.log(this.validatorService.applyFilter(this.htmlContent))
-
-    //this.sharingData.setHTMLData(this.htmlContent)
     console.log("htmlContent",this.htmlContent)
 
     this.validatorService.validateHTML(pureHTML).subscribe({
       next: (response) => {
         this.validationResponse = response;
         console.log('Validation Result:', response);
-        this.sharingData.setSharedData(this.validationResponse.messages)
+        this.sharingData.setSharedData(this.validationResponse.messages) //save the validation problems to send it the controlpanel page 
       },
       error: (e) => {
         console.error('Validation Error:', e);
-      }
+      },complete:() =>{
+          this.router.navigate(["/controlPanel"])
+      },
     });
   }
 
+  /**
+   * Upload type check
+   * @param type upload type
+   */
   selectUploadType(type:string){
     switch (type) {
       case "url":
@@ -131,6 +126,11 @@ export class UploadComponent implements OnInit {
    })
   }
 
+  /**
+   * Fájl felöltés opciókor a kiválasztott fájlból kiolvassuk a html kódot és azt
+   * elmentjük a fileContent véltozóba
+   * @param event feltöltés kiválasztásakor
+   */
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     const reader: FileReader = new FileReader();

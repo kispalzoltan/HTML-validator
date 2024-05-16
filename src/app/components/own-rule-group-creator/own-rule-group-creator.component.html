@@ -43,6 +43,6 @@
         </tr>
       </body>
     </table>
-    <button mat-button (click)="createGroup()">Csoport létrehozása</button>
+    <button mat-button [mat-dialog-close]="true" (click)="createGroup()">Csoport létrehozása</button>
   </div>
 </div>

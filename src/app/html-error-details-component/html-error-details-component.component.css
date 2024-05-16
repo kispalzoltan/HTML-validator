@@ -33,3 +33,7 @@
 code{
   display: grid;
 }
+.generateBtn{
+  position: absolute;
+  margin-left: 23%;
+}

@@ -122,7 +122,7 @@
                   <td class="checkBox"><mat-checkbox formControlName="{{i}}"></mat-checkbox></td>
                   <td class="ruleTableID">{{i}}</td>
                   <td class="ruleTableName">{{item.groupName}}</td>
-                  <td class="ruleTableDel"><button mat-button (click)="''"><mat-icon>delete</mat-icon></button></td>
+                  <td class="ruleTableDel"><button mat-button (click)="deleteOwnRuleGroup(item)"><mat-icon>delete</mat-icon></button></td>
                 </tr>
               </body>
             </table>

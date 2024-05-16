@@ -14,6 +14,10 @@
     </div>
     <div class="insideContainer">
         <h3>ChatGPT segítségkérés</h3>
+        <button mat-stroked-button class="generateBtn" (click)="generateAiFix()">Generálás</button>
+        <div class="codeBlock">
+            <pre><code class="language-html" [innerHTML]="this.highlightedGeneratedFix"></code></pre>
+        </div>
     </div>
 </div>
 <mat-dialog-actions align="end" class="actionButtons">

@@ -37,4 +37,9 @@ export class OwnRuleService {
   getOwnRuleGroup(email: string){
     return this.http.post<any>(this.BASE_URL+'getOwnRuleGroups', email);
   }
+
+  deleteOwnRuleGroup(email: string, htmlContent: any){
+    const body = { email: email, ownRuleGroup: htmlContent};
+    return this.http.post<any>(this.BASE_URL+'deleteOwnRuleGroup', body);
+  }
 }

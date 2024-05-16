@@ -1,10 +1,27 @@
 <div class="mainAIContainer">
-<div class="codeBlock block">
-    <h2>Feltöltött HTML állomány</h2>
-</div>
-
-<div class="aiBlock block">
-    <h2>Chat GPT változtatás</h2>
-</div>
-
-</div>
+    <div class="codeBlock block">
+      <h2>Feltöltött HTML állomány</h2>
+      <form [formGroup]="textareaFormGroup">
+        <mat-form-field class="example-full-width_text">
+          <mat-label>Illesszen be egy html szöveget, vagy töltsön fel egy fájlt</mat-label>
+          <textarea matInput formControlName="textareaControl" placeholder="Ex. It makes me feel..."></textarea>
+        </mat-form-field>
+      </form>
+    </div>
+  
+    <div class="aiBlock block">
+      <h2>Chat GPT változtatás</h2>
+      <div>
+        <form class="aiInputBlock" [formGroup]="inputFormGroup">
+          <mat-form-field class="input-block-full-width">
+            <mat-label>Írja be a kívánt módosítást</mat-label>
+            <input matInput formControlName="inputControl" value="Sushi">
+          </mat-form-field>
+          <button mat-fab (click)="generateAiFix()"><mat-icon>send</mat-icon></button>
+        </form>
+        <div class="aicodeBlock">
+            <pre><code class="language-html" [innerHTML]="this.highlightedGeneratedFix"></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
